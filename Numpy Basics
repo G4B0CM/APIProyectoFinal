@@ -1,0 +1,1527 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/G4B0CM/APIProyectoFinal/blob/master/Numpy%20Basics\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "MuYB4pE_viZG"
+      },
+      "source": [
+        "# Práctica de la librería Numpy\n",
+        "\n",
+        "En este notebook, se desarrollarán una serie de tareas utilizando la librería Numpy (Numerical Python).\n",
+        "\n",
+        "Se proponen y documentan posibles formas de resolver los ejercicios, pero las mismas no son únicas.\n",
+        "\n",
+        "Siempre es una buena idea verificar la [Documentación Oficial de Numpy](https://numpy.org/devdocs/user/index.html), donde es posible encontrar todo tipo de información referida a esta librería. Y si te quedas trabado, busca en Google \"como hacer [algo] con Numpy\". Hay enormes probabilidades de que esa pregunta ya haya sido respondida!"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Hrz__kvsviZL"
+      },
+      "source": [
+        "# Importamos Numpy con su abreviación \"np\"\n",
+        "import numpy as np"
+      ],
+      "execution_count": 1,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "9fwuO-3_viZM"
+      },
+      "source": [
+        "# Podemos crear arrays de una dimensión con la función np.array()\n",
+        "array_unidim = np.array([1,2,3,4,5])\n",
+        "# O un array de dos dimensiones (bidimensional)\n",
+        "array_bidim = np.array([[1,2,3],[4,5,6]])\n",
+        "\n",
+        "# O un array de tres dimensiones (tridimensional)\n",
+        "array_tridim = np.array([[[1,2,3],[4,5,6]],[[7,8,9],[10,11,12]]])\n"
+      ],
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "qp2_ZpJXviZN"
+      },
+      "source": [
+        "Para cada uno de estos arrays, podemos obtener sus propiedades, tales como su \"forma\", número de dimensiones, tipos de datos y tamaño."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "m2HD8334viZN",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "5600b588-4260-4e4f-db0b-7fd92c4a43c0"
+      },
+      "source": [
+        "# Atributos del array unidimensional (forma, número de dimensiones, tipos de datos, tamaño, y tipo)\n",
+        "array_unidim.shape, array_unidim.ndim, array_unidim.dtype, array_unidim.size, type(array_unidim)"
+      ],
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "((5,), 1, dtype('int64'), 5, numpy.ndarray)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 3
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "CW6dU4z6viZO",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "202fd669-4a7a-434a-bbb1-3b74fed650b2"
+      },
+      "source": [
+        "# Atributos del array bidimensional\n",
+        "array_bidim.shape, array_bidim.ndim, array_bidim.dtype, array_bidim.size, type(array_bidim)"
+      ],
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "((2, 3), 2, dtype('int64'), 6, numpy.ndarray)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 4
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "2dQw-98tviZP",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "5ad8b4e3-bb3a-4d6a-e38b-2d99f5f0191e"
+      },
+      "source": [
+        "# Atributos del array tridimensional\n",
+        "array_tridim.shape, array_tridim.ndim, array_tridim.dtype, array_tridim.size, type(array_tridim)"
+      ],
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "((2, 2, 3), 3, dtype('int64'), 12, numpy.ndarray)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 5
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "bqWXuSpEviZQ",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 125
+        },
+        "outputId": "8c362adf-2617-4646-ead4-576b1e3ea19b"
+      },
+      "source": [
+        "# Importamos pandas como pd, y creamos un DataFrame a partir del array bidimensional\n",
+        "import pandas as pd\n",
+        "datos = pd.DataFrame(array_bidim)\n",
+        "datos"
+      ],
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "   0  1  2\n",
+              "0  1  2  3\n",
+              "1  4  5  6"
+            ],
+            "text/html": [
+              "\n",
+              "  <div id=\"df-aa3d8311-7929-4266-a255-89ca5b0d9566\" class=\"colab-df-container\">\n",
+              "    <div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>0</th>\n",
+              "      <th>1</th>\n",
+              "      <th>2</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>1</td>\n",
+              "      <td>2</td>\n",
+              "      <td>3</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>4</td>\n",
+              "      <td>5</td>\n",
+              "      <td>6</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>\n",
+              "    <div class=\"colab-df-buttons\">\n",
+              "\n",
+              "  <div class=\"colab-df-container\">\n",
+              "    <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-aa3d8311-7929-4266-a255-89ca5b0d9566')\"\n",
+              "            title=\"Convert this dataframe to an interactive table.\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewBox=\"0 -960 960 960\">\n",
+              "    <path d=\"M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z\"/>\n",
+              "  </svg>\n",
+              "    </button>\n",
+              "\n",
+              "  <style>\n",
+              "    .colab-df-container {\n",
+              "      display:flex;\n",
+              "      gap: 12px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert {\n",
+              "      background-color: #E8F0FE;\n",
+              "      border: none;\n",
+              "      border-radius: 50%;\n",
+              "      cursor: pointer;\n",
+              "      display: none;\n",
+              "      fill: #1967D2;\n",
+              "      height: 32px;\n",
+              "      padding: 0 0 0 0;\n",
+              "      width: 32px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert:hover {\n",
+              "      background-color: #E2EBFA;\n",
+              "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "      fill: #174EA6;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-buttons div {\n",
+              "      margin-bottom: 4px;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert {\n",
+              "      background-color: #3B4455;\n",
+              "      fill: #D2E3FC;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert:hover {\n",
+              "      background-color: #434B5C;\n",
+              "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
+              "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
+              "      fill: #FFFFFF;\n",
+              "    }\n",
+              "  </style>\n",
+              "\n",
+              "    <script>\n",
+              "      const buttonEl =\n",
+              "        document.querySelector('#df-aa3d8311-7929-4266-a255-89ca5b0d9566 button.colab-df-convert');\n",
+              "      buttonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "\n",
+              "      async function convertToInteractive(key) {\n",
+              "        const element = document.querySelector('#df-aa3d8311-7929-4266-a255-89ca5b0d9566');\n",
+              "        const dataTable =\n",
+              "          await google.colab.kernel.invokeFunction('convertToInteractive',\n",
+              "                                                    [key], {});\n",
+              "        if (!dataTable) return;\n",
+              "\n",
+              "        const docLinkHtml = 'Like what you see? Visit the ' +\n",
+              "          '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
+              "          + ' to learn more about interactive tables.';\n",
+              "        element.innerHTML = '';\n",
+              "        dataTable['output_type'] = 'display_data';\n",
+              "        await google.colab.output.renderOutput(dataTable, element);\n",
+              "        const docLink = document.createElement('div');\n",
+              "        docLink.innerHTML = docLinkHtml;\n",
+              "        element.appendChild(docLink);\n",
+              "      }\n",
+              "    </script>\n",
+              "  </div>\n",
+              "\n",
+              "\n",
+              "    <div id=\"df-c6184453-e61e-4c9d-9a61-6ccbaec46420\">\n",
+              "      <button class=\"colab-df-quickchart\" onclick=\"quickchart('df-c6184453-e61e-4c9d-9a61-6ccbaec46420')\"\n",
+              "                title=\"Suggest charts\"\n",
+              "                style=\"display:none;\">\n",
+              "\n",
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\"viewBox=\"0 0 24 24\"\n",
+              "     width=\"24px\">\n",
+              "    <g>\n",
+              "        <path d=\"M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z\"/>\n",
+              "    </g>\n",
+              "</svg>\n",
+              "      </button>\n",
+              "\n",
+              "<style>\n",
+              "  .colab-df-quickchart {\n",
+              "      --bg-color: #E8F0FE;\n",
+              "      --fill-color: #1967D2;\n",
+              "      --hover-bg-color: #E2EBFA;\n",
+              "      --hover-fill-color: #174EA6;\n",
+              "      --disabled-fill-color: #AAA;\n",
+              "      --disabled-bg-color: #DDD;\n",
+              "  }\n",
+              "\n",
+              "  [theme=dark] .colab-df-quickchart {\n",
+              "      --bg-color: #3B4455;\n",
+              "      --fill-color: #D2E3FC;\n",
+              "      --hover-bg-color: #434B5C;\n",
+              "      --hover-fill-color: #FFFFFF;\n",
+              "      --disabled-bg-color: #3B4455;\n",
+              "      --disabled-fill-color: #666;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart {\n",
+              "    background-color: var(--bg-color);\n",
+              "    border: none;\n",
+              "    border-radius: 50%;\n",
+              "    cursor: pointer;\n",
+              "    display: none;\n",
+              "    fill: var(--fill-color);\n",
+              "    height: 32px;\n",
+              "    padding: 0;\n",
+              "    width: 32px;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart:hover {\n",
+              "    background-color: var(--hover-bg-color);\n",
+              "    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "    fill: var(--button-hover-fill-color);\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-quickchart-complete:disabled,\n",
+              "  .colab-df-quickchart-complete:disabled:hover {\n",
+              "    background-color: var(--disabled-bg-color);\n",
+              "    fill: var(--disabled-fill-color);\n",
+              "    box-shadow: none;\n",
+              "  }\n",
+              "\n",
+              "  .colab-df-spinner {\n",
+              "    border: 2px solid var(--fill-color);\n",
+              "    border-color: transparent;\n",
+              "    border-bottom-color: var(--fill-color);\n",
+              "    animation:\n",
+              "      spin 1s steps(1) infinite;\n",
+              "  }\n",
+              "\n",
+              "  @keyframes spin {\n",
+              "    0% {\n",
+              "      border-color: transparent;\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "      border-left-color: var(--fill-color);\n",
+              "    }\n",
+              "    20% {\n",
+              "      border-color: transparent;\n",
+              "      border-left-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "    }\n",
+              "    30% {\n",
+              "      border-color: transparent;\n",
+              "      border-left-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "      border-right-color: var(--fill-color);\n",
+              "    }\n",
+              "    40% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "      border-top-color: var(--fill-color);\n",
+              "    }\n",
+              "    60% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "    }\n",
+              "    80% {\n",
+              "      border-color: transparent;\n",
+              "      border-right-color: var(--fill-color);\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "    }\n",
+              "    90% {\n",
+              "      border-color: transparent;\n",
+              "      border-bottom-color: var(--fill-color);\n",
+              "    }\n",
+              "  }\n",
+              "</style>\n",
+              "\n",
+              "      <script>\n",
+              "        async function quickchart(key) {\n",
+              "          const quickchartButtonEl =\n",
+              "            document.querySelector('#' + key + ' button');\n",
+              "          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.\n",
+              "          quickchartButtonEl.classList.add('colab-df-spinner');\n",
+              "          try {\n",
+              "            const charts = await google.colab.kernel.invokeFunction(\n",
+              "                'suggestCharts', [key], {});\n",
+              "          } catch (error) {\n",
+              "            console.error('Error during call to suggestCharts:', error);\n",
+              "          }\n",
+              "          quickchartButtonEl.classList.remove('colab-df-spinner');\n",
+              "          quickchartButtonEl.classList.add('colab-df-quickchart-complete');\n",
+              "        }\n",
+              "        (() => {\n",
+              "          let quickchartButtonEl =\n",
+              "            document.querySelector('#df-c6184453-e61e-4c9d-9a61-6ccbaec46420 button');\n",
+              "          quickchartButtonEl.style.display =\n",
+              "            google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "        })();\n",
+              "      </script>\n",
+              "    </div>\n",
+              "\n",
+              "  <div id=\"id_3aecec48-e198-4fb1-9d75-ffb242c49e9b\">\n",
+              "    <style>\n",
+              "      .colab-df-generate {\n",
+              "        background-color: #E8F0FE;\n",
+              "        border: none;\n",
+              "        border-radius: 50%;\n",
+              "        cursor: pointer;\n",
+              "        display: none;\n",
+              "        fill: #1967D2;\n",
+              "        height: 32px;\n",
+              "        padding: 0 0 0 0;\n",
+              "        width: 32px;\n",
+              "      }\n",
+              "\n",
+              "      .colab-df-generate:hover {\n",
+              "        background-color: #E2EBFA;\n",
+              "        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "        fill: #174EA6;\n",
+              "      }\n",
+              "\n",
+              "      [theme=dark] .colab-df-generate {\n",
+              "        background-color: #3B4455;\n",
+              "        fill: #D2E3FC;\n",
+              "      }\n",
+              "\n",
+              "      [theme=dark] .colab-df-generate:hover {\n",
+              "        background-color: #434B5C;\n",
+              "        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
+              "        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
+              "        fill: #FFFFFF;\n",
+              "      }\n",
+              "    </style>\n",
+              "    <button class=\"colab-df-generate\" onclick=\"generateWithVariable('datos')\"\n",
+              "            title=\"Generate code using this dataframe.\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\"viewBox=\"0 0 24 24\"\n",
+              "       width=\"24px\">\n",
+              "    <path d=\"M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z\"/>\n",
+              "  </svg>\n",
+              "    </button>\n",
+              "    <script>\n",
+              "      (() => {\n",
+              "      const buttonEl =\n",
+              "        document.querySelector('#id_3aecec48-e198-4fb1-9d75-ffb242c49e9b button.colab-df-generate');\n",
+              "      buttonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "\n",
+              "      buttonEl.onclick = () => {\n",
+              "        google.colab.notebook.generateWithVariable('datos');\n",
+              "      }\n",
+              "      })();\n",
+              "    </script>\n",
+              "  </div>\n",
+              "\n",
+              "    </div>\n",
+              "  </div>\n"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "dataframe",
+              "variable_name": "datos",
+              "summary": "{\n  \"name\": \"datos\",\n  \"rows\": 2,\n  \"fields\": [\n    {\n      \"column\": 0,\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 2,\n        \"min\": 1,\n        \"max\": 4,\n        \"num_unique_values\": 2,\n        \"samples\": [\n          4,\n          1\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": 1,\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 2,\n        \"min\": 2,\n        \"max\": 5,\n        \"num_unique_values\": 2,\n        \"samples\": [\n          5,\n          2\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": 2,\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 2,\n        \"min\": 3,\n        \"max\": 6,\n        \"num_unique_values\": 2,\n        \"samples\": [\n          6,\n          3\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    }\n  ]\n}"
+            }
+          },
+          "metadata": {},
+          "execution_count": 7
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "uxuBbWJlviZQ",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "c1c862e6-a7b5-46b7-a534-1ee4e4ae3c2b"
+      },
+      "source": [
+        "# Creamos un array de tamaño 4x3, formado únicamente por unos (1)\n",
+        "unos = np.ones((4,3))\n",
+        "unos"
+      ],
+      "execution_count": 8,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[1., 1., 1.],\n",
+              "       [1., 1., 1.],\n",
+              "       [1., 1., 1.],\n",
+              "       [1., 1., 1.]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 8
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "lf4ntwB-viZR",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "02f85ae5-dd8c-477a-8598-b1a297edc487"
+      },
+      "source": [
+        "# Creamos un array de tamaño 2x4x3, formado únicamente por ceros (0)\n",
+        "cero = np.zeros((2,4,3))\n",
+        "cero"
+      ],
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[[0., 0., 0.],\n",
+              "        [0., 0., 0.],\n",
+              "        [0., 0., 0.],\n",
+              "        [0., 0., 0.]],\n",
+              "\n",
+              "       [[0., 0., 0.],\n",
+              "        [0., 0., 0.],\n",
+              "        [0., 0., 0.],\n",
+              "        [0., 0., 0.]]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 11
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "HSJS5vPvviZS",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "9ec38e58-5988-4cba-9baa-68d1173ce2bd"
+      },
+      "source": [
+        "# Creamos un array de números en el rango de 0 a 100, con un paso de 5\n",
+        "array_1 = np.arange(0,100,5)\n",
+        "array_1"
+      ],
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([ 0,  5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80,\n",
+              "       85, 90, 95])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 12
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "IuSvyty3viZT",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "dc21ac54-8d5a-482a-c3f9-32398296e177"
+      },
+      "source": [
+        "# Creamos un array de números aleatorios enteros comprendidos en entre 0 y 10, de tamaño (2, 5)\n",
+        "array_2 = np.random.randint(0,10,(2,5))\n",
+        "array_2"
+      ],
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[6, 3, 3, 7, 3],\n",
+              "       [7, 6, 5, 0, 1]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 14
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "grncP2mwviZT",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "b4d13a83-1da4-4450-9eca-2ba3a65af87a"
+      },
+      "source": [
+        "# Creamos un array de números aleatorios decimales comprendidos en entre 0 y 1, de tamaño (3, 5)\n",
+        "array_3 = np.random.random((3,3,5))\n",
+        "array_3"
+      ],
+      "execution_count": 15,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[[0.56087233, 0.77713812, 0.59786698, 0.95072109, 0.01510327],\n",
+              "        [0.94227339, 0.84971016, 0.34995152, 0.2569488 , 0.44631153],\n",
+              "        [0.29712392, 0.22264783, 0.06238702, 0.33012695, 0.26931027]],\n",
+              "\n",
+              "       [[0.29717211, 0.95097808, 0.09143143, 0.22915085, 0.70936838],\n",
+              "        [0.42071604, 0.83751825, 0.42387342, 0.32239887, 0.136674  ],\n",
+              "        [0.64271797, 0.06318661, 0.29065866, 0.14949556, 0.55368916]],\n",
+              "\n",
+              "       [[0.16047782, 0.8550042 , 0.94567723, 0.96360435, 0.67005776],\n",
+              "        [0.08021497, 0.18479015, 0.55890468, 0.12735681, 0.59309116],\n",
+              "        [0.54452382, 0.37365965, 0.24171352, 0.71811435, 0.22496161]]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 15
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "8pCexJ6zviZT",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "39718a86-1002-469c-d1bb-377b84e9883d"
+      },
+      "source": [
+        "# Establecemos la \"semilla\" de números aleatorios en 27\n",
+        "np.random.seed(27)\n",
+        "# Creamos un array de números aleatorios enteros comprendidos en entre 0 y 10, de tamaño (3, 5)\n",
+        "array_4 = np.random.randint(0,10,(3,5))\n",
+        "array_4"
+      ],
+      "execution_count": 16,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[3, 8, 8, 8, 0],\n",
+              "       [5, 8, 9, 1, 2],\n",
+              "       [1, 1, 4, 6, 3]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 16
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "N41yqfNDviZU"
+      },
+      "source": [
+        "¿Qué ocurre al correr la última celda nuevamente, a diferencia de las anteriores?"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "acrAc-j4viZY",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "80ccd6ca-de97-4fb2-cdf3-4bfe15f3ec15"
+      },
+      "source": [
+        "# Encontramos los valores únicos del array_4\n",
+        "np.unique(array_4)"
+      ],
+      "execution_count": 17,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([0, 1, 2, 3, 4, 5, 6, 8, 9])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 17
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "d-pXWguvviZZ",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "603e33bd-f496-4e03-de5d-c7623e6133b8"
+      },
+      "source": [
+        "# Extraemos el elemento de índice 1 del array_4\n",
+        "array_4[1]"
+      ],
+      "execution_count": 18,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([5, 8, 9, 1, 2])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 18
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "cVx_UouPviZa",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "ed2643a2-9cbd-4e33-caa2-e3434387d921"
+      },
+      "source": [
+        "# Extraemos las primeras dos filas del array_4\n",
+        "array_4[:2]"
+      ],
+      "execution_count": 19,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[3, 8, 8, 8, 0],\n",
+              "       [5, 8, 9, 1, 2]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 19
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "rIsVaI-JviZa",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "ca030c10-7a71-4845-db12-4261810ee4a0"
+      },
+      "source": [
+        "# Extraemos los dos primeros datos de las primeras dos filas del array_4\n",
+        "array_4[:2,:2]"
+      ],
+      "execution_count": 21,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[3, 8, 8],\n",
+              "       [5, 8, 9]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 21
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "3sw4JCF6viZb"
+      },
+      "source": [
+        "# Creamos dos arrays de tamaño 3x4: uno relleno de números aleatorios entre 0 y 10, y otro relleno de unos\n",
+        "array5 = np.random.randint(0,10,(3,4))\n",
+        "array6 = np.ones((3,4))"
+      ],
+      "execution_count": 23,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "kVas2wqdviZb",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "5a05c937-d51a-4ad5-d970-392e470ec7b4"
+      },
+      "source": [
+        "# invocamos el array_5\n",
+        "array5"
+      ],
+      "execution_count": 24,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[1, 2, 0, 3],\n",
+              "       [3, 5, 3, 5],\n",
+              "       [0, 7, 7, 4]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 24
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ZnZoUjRIviZb",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "36bd2d7d-7cd1-4465-8bd1-e81c461d0358"
+      },
+      "source": [
+        "# invocamos el array_6\n",
+        "array6"
+      ],
+      "execution_count": 25,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[1., 1., 1., 1.],\n",
+              "       [1., 1., 1., 1.],\n",
+              "       [1., 1., 1., 1.]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 25
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "EoBkbsHqviZb",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "716409e5-dc7a-4fae-d232-a5655b307f35"
+      },
+      "source": [
+        "# Sumamos los dos arrays\n",
+        "array5 + array6"
+      ],
+      "execution_count": 26,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[2., 3., 1., 4.],\n",
+              "       [4., 6., 4., 6.],\n",
+              "       [1., 8., 8., 5.]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 26
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "493z2XKFviZc",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "50cafc9d-1e0b-494f-fd43-0adbbb1313da"
+      },
+      "source": [
+        "# Creamos ahora un array de tamaño (4,3) lleno de unos\n",
+        "array7 = np.ones((4,3))\n",
+        "array7"
+      ],
+      "execution_count": 28,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[1., 1., 1.],\n",
+              "       [1., 1., 1.],\n",
+              "       [1., 1., 1.],\n",
+              "       [1., 1., 1.]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 28
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "f19RtdoYviZc",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 158
+        },
+        "outputId": "6a1cedc1-f222-40b8-89cd-f3e35511c042"
+      },
+      "source": [
+        "# Intentaremos sumar los arrays 6 y 7\n",
+        "array6 + array7"
+      ],
+      "execution_count": 29,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "ValueError",
+          "evalue": "operands could not be broadcast together with shapes (3,4) (4,3) ",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mValueError\u001b[0m                                Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-29-a85919546c7f>\u001b[0m in \u001b[0;36m<cell line: 0>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0;31m# Intentaremos sumar los arrays 6 y 7\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 2\u001b[0;31m \u001b[0marray6\u001b[0m \u001b[0;34m+\u001b[0m \u001b[0marray7\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mValueError\u001b[0m: operands could not be broadcast together with shapes (3,4) (4,3) "
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "wZKsfqU4viZc"
+      },
+      "source": [
+        "¿A qué se debe el error anterior? ¿Qué deberíamos tener en cuenta para que no suceda?"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "obwyxLmWviZc"
+      },
+      "source": [
+        "# Entonces crearemos otro array de tamaño (4,3) lleno de unos\n",
+        "array8 = np.ones((4,3))"
+      ],
+      "execution_count": 30,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "JyBEsQ5NviZd",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "80e64566-07a1-4b37-d4d6-afb51338cefe"
+      },
+      "source": [
+        "# Restamos el array_8 al array_7\n",
+        "array8-array7"
+      ],
+      "execution_count": 31,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[0., 0., 0.],\n",
+              "       [0., 0., 0.],\n",
+              "       [0., 0., 0.],\n",
+              "       [0., 0., 0.]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 31
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "utZb5NTzviZd"
+      },
+      "source": [
+        "# Creamos otros dos arrays de tamaño 3x3 con números aleatorios del 1 al 5\n",
+        "array9 = np.random.randint(1,5,(3,3))\n",
+        "array10 = np.random.randint(1,5,(3,3))"
+      ],
+      "execution_count": 34,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "u1vV-B5C2vSk",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "60054d27-3ecf-4eb2-ae34-47efa5492ee4"
+      },
+      "source": [
+        "# invocamos el array_9\n",
+        "array9"
+      ],
+      "execution_count": 35,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[2, 2, 4],\n",
+              "       [1, 4, 1],\n",
+              "       [1, 1, 2]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 35
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "79rO6fGL2wvE",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "3943e2b4-80d5-4ce2-fd8b-8d51534e412e"
+      },
+      "source": [
+        "# invocamos el array_10\n",
+        "array10"
+      ],
+      "execution_count": 36,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[2, 1, 1],\n",
+              "       [4, 1, 4],\n",
+              "       [1, 2, 4]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 36
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ZhBCrrbKviZd",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "aab2c958-ff37-4012-f902-bda2d1c1d336"
+      },
+      "source": [
+        "# Multiplicamos los últimos dos arrays entre sí\n",
+        "array9*array10"
+      ],
+      "execution_count": 37,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[4, 2, 4],\n",
+              "       [4, 4, 4],\n",
+              "       [1, 2, 8]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 37
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "-u-zydBZviZd",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "5d5860ed-10db-4b79-93c5-d9ed008c49af"
+      },
+      "source": [
+        "# Elevamos el array_9 al cuadrado\n",
+        "array9**2"
+      ],
+      "execution_count": 38,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[ 4,  4, 16],\n",
+              "       [ 1, 16,  1],\n",
+              "       [ 1,  1,  4]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 38
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "dMEqsjSD3D6F",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "0719c0bd-efec-4d85-d434-29c66db10d4c"
+      },
+      "source": [
+        "# Buscamos la raíz cuadrada del array_10\n",
+        "np.sqrt(array10)"
+      ],
+      "execution_count": 39,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[1.41421356, 1.        , 1.        ],\n",
+              "       [2.        , 1.        , 2.        ],\n",
+              "       [1.        , 1.41421356, 2.        ]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 39
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "4TlMFRRFviZd",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "8002843a-2b8d-4bc1-a416-a36594263849"
+      },
+      "source": [
+        "# Hallamos el promedio de los valores del array_9\n",
+        "array9.mean()"
+      ],
+      "execution_count": 40,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "np.float64(2.0)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 40
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "mu1-ASw7viZd",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "ab0deffc-de24-47ce-d093-9188209c27e2"
+      },
+      "source": [
+        "# Hallamos el valor máximo de los valores del array_9\n",
+        "array9.max()"
+      ],
+      "execution_count": 41,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "np.int64(4)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 41
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "iKAPHmnVviZe",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "6125335e-128c-494b-d676-1890b8cf5634"
+      },
+      "source": [
+        "# Hallamos el valor mínimo de los valores del array_9\n",
+        "array9.min()"
+      ],
+      "execution_count": 42,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "np.int64(1)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 42
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "K2N9WX6dviZe"
+      },
+      "source": [
+        "# Cambiamos la forma del array_9 por una de 9x1, y lo almacenamos como array_11\n",
+        "array11 = array9.reshape((9,1))"
+      ],
+      "execution_count": 43,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "YM2wKMOk3vrJ",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "fd512c9a-38de-4af8-d411-ffce53bcccb4"
+      },
+      "source": [
+        "# invocamos el array_11\n",
+        "array11"
+      ],
+      "execution_count": 44,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[2],\n",
+              "       [2],\n",
+              "       [4],\n",
+              "       [1],\n",
+              "       [4],\n",
+              "       [1],\n",
+              "       [1],\n",
+              "       [1],\n",
+              "       [2]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 44
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "hjv049niviZe",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "04292fe0-dd26-4075-cca8-234532aa59a0"
+      },
+      "source": [
+        "# Transponemos el array_11\n",
+        "array11.transpose()"
+      ],
+      "execution_count": 45,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[2, 2, 4, 1, 4, 1, 1, 1, 2]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 45
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ygIkkZcwviZg",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "857fa139-bec9-4356-c8f2-481c0dd53c21"
+      },
+      "source": [
+        "# Comparamos el array_9 y el array_10, para saber cuáles elementos del array_9 son mayores a los del array_10\n",
+        "array12 = array9 >array10\n",
+        "array12"
+      ],
+      "execution_count": 46,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[False,  True,  True],\n",
+              "       [False,  True, False],\n",
+              "       [False, False, False]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 46
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "-MNVhc50viZg"
+      },
+      "source": [
+        "¿Qué tipos de datos forman parte del array de resultados?"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "JRRyJjDdEUd4",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "ef5fce9f-1bfb-40fe-8b03-22d7d733d391"
+      },
+      "source": [
+        "# Veamos sus nuevos tipos de datos\n",
+        "array12.dtype"
+      ],
+      "execution_count": 48,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "dtype('bool')"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 48
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "toyvK5rYviZh",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "a3b035ca-522b-41db-8943-c76208535627"
+      },
+      "source": [
+        "# Alguno de los elementos del array_9 es igual su equivalente del array_10?\n",
+        "array9 == array10"
+      ],
+      "execution_count": 49,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[ True, False, False],\n",
+              "       [False, False, False],\n",
+              "       [ True, False, False]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 49
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "FXguC1-UviZg",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "71e43391-685c-4e18-d3f7-e965f3a4f8dc"
+      },
+      "source": [
+        "# Comparamos nuevamente ambos arrays, en esta ocasión con >=\n",
+        "array9 >= array10"
+      ],
+      "execution_count": 50,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[ True,  True,  True],\n",
+              "       [False,  True, False],\n",
+              "       [ True, False, False]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 50
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Ws2bJ0ZEviZg",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "33bce9ba-1704-4e56-9833-92acf6778586"
+      },
+      "source": [
+        "# Buscamos los elementos del array_9 que son mayores a 2\n",
+        "array9>2"
+      ],
+      "execution_count": 51,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[False, False,  True],\n",
+              "       [False,  True, False],\n",
+              "       [False, False, False]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 51
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "z4XeFVsoviZh",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "6740da4b-85af-4ce4-a059-42c5336ccefa"
+      },
+      "source": [
+        "# Ordenamos de menor a mayor los elementos dentro del array_9\n",
+        "np.sort(array9)"
+      ],
+      "execution_count": 52,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[2, 2, 4],\n",
+              "       [1, 1, 4],\n",
+              "       [1, 1, 2]])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 52
+        }
+      ]
+    }
+  ]
+}
